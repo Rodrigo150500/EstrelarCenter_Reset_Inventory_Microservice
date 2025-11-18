@@ -1,4 +1,4 @@
-from src.model.database.mongodb.repositories.types.update_one_interface import UpdateOneInterface
+from src.model.database.mongodb.repositories.types.update_one_interface import IUpdateOne
 from dotenv import dotenv_values
 from bson.objectid import ObjectId
 
@@ -26,7 +26,7 @@ class ProductRepository:
         return response   
 
 
-    def update_product_by_code_to_zero(self, code: str, item: str) -> UpdateOneInterface:
+    def update_product_by_code_to_zero(self, code: str, item: str) -> IUpdateOne:
 
         response = self.__collection.update_one(
             {code: {"$exists": True}},

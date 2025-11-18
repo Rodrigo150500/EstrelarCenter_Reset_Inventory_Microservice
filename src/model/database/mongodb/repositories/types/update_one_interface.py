@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 @dataclass
-class UpdateOneInterface:
+class IUpdateOne:
 
     matched_count: int
     modifiedCount: int
