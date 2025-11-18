@@ -6,7 +6,7 @@ from src.model.database.mongodb.repositories.types.update_one_interface import I
 class IProductRepository(ABC):
 
     @abstractmethod
-    def get_all_object_id(self) -> list:
+    def get_all_products(self) -> list:
         pass
     
 

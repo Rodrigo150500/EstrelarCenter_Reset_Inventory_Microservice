@@ -12,7 +12,7 @@ class ProductRepository:
         self.__collection = connection.get_collection(COLLECTION_NAME)
     
 
-    def get_all_object_id(self) -> list:
+    def get_all_products(self) -> list:
 
         response = self.__collection.find()        
 
