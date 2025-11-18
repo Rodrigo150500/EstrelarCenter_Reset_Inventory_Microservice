@@ -198,3 +198,5 @@ cython_debug/
 **/*.xlsx
 **/*.xls
 **/tests
+**/.env
+*.env
