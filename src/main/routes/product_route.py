@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from src.main.compose.product_reset_stock_compose import product_reset_stock_compose
+from src.main.compose.mongo_db.product_reset_stock_compose import product_reset_stock_compose
 from src.errors.error_handler import error_handler
 
 product_route_bp = Blueprint("product_route_bp", __name__)

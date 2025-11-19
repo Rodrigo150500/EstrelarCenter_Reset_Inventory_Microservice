@@ -1,6 +1,6 @@
 from src.model.database.mongodb.settings.mongo_db_connection import mongo_db_connection
 from src.model.database.mongodb.repositories.product_repository import ProductRepository
-from src.use_case.reset_stock_product import ResetStockProduct
+from src.use_case.mongo_db.reset_stock_product import ResetStockProduct
 
 def product_reset_stock_compose():
     
