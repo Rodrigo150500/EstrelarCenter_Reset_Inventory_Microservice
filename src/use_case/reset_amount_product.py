@@ -1,5 +1,6 @@
 from src.main.http_types.http_response.http_response import HttpResponse
 from src.model.database.mongodb.repositories.interface.product_repository_interface import IProductRepository
+from src.errors.types.http_error_server import HttpErrorServer
 
 class ResetAmountProduct:
 
@@ -9,21 +10,26 @@ class ResetAmountProduct:
     
 
     def handle(self) -> HttpResponse:
+
+        try:
     
-        #capturar todos os produtos
-        products = self.__get_all_products_from_db()
+            products = self.__get_all_products_from_db()
 
-        #get code and item list
-        code_list, item_list = self.__get_code_and_items_length(products)
+            code_list, item_list = self.__get_code_and_items_length(products)
 
-        #Atualizar as quantidades para 0
-        self.__update_amount(code_list, item_list)
+            self.__update_amount(code_list, item_list)
 
-        formatted_response = self.__format_response(code_list)
+            formatted_response = self.__format_response(code_list)
 
-        return formatted_response        
+            return formatted_response        
 
-    
+        except Exception as exception:
+            
+            print(f"Error Server: {str(exception)}")
+            
+            raise HttpErrorServer("Server Error")
+
+
     def __get_all_products_from_db(self) -> list:
 
         products = self.__repository.get_all_products()
