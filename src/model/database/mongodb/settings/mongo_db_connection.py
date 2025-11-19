@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from dotenv import dotenv_values
 
-ENV = dotenv_values(".env")
+ENV = dotenv_values("dev.env")
 
 USER = ENV["USERNAME"]
 PASSWORD = ENV["PASSWORD"]

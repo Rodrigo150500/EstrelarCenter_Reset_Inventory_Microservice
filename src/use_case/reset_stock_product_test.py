@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock, call
-from .reset_amount_product import ResetAmountProduct
-from .data.reset_amount_product_data import reset_amount_product_data
+from .reset_stock_product import ResetStockProduct
+from .data.reset_stock_product_data import reset_stock_product_data
 from src.main.http_types.http_response.http_response import HttpResponse
 
 @pytest.fixture
@@ -9,7 +9,7 @@ def setup_use_case():
 
     repository = Mock()
 
-    use_case = ResetAmountProduct(repository)
+    use_case = ResetStockProduct(repository)
 
     data = {
         "repository": repository,
@@ -19,9 +19,9 @@ def setup_use_case():
     return data
 
 
-def test_reset_amount_sucessfully(setup_use_case):
+def test_reset_stock_sucessfully(setup_use_case):
 
-    data = reset_amount_product_data()
+    data = reset_stock_product_data()
 
     repository = setup_use_case["repository"]
 

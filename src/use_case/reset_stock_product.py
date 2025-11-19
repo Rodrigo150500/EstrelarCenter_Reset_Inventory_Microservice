@@ -2,7 +2,7 @@ from src.main.http_types.http_response.http_response import HttpResponse
 from src.model.database.mongodb.repositories.interface.product_repository_interface import IProductRepository
 from src.errors.types.http_error_server import HttpErrorServer
 
-class ResetAmountProduct:
+class ResetStockProduct:
 
     def __init__(self, repository: IProductRepository):
         
@@ -17,7 +17,7 @@ class ResetAmountProduct:
 
             code_list, item_list = self.__get_code_and_items_length(products)
 
-            self.__update_amount(code_list, item_list)
+            self.__update_stock(code_list, item_list)
 
             formatted_response = self.__format_response(code_list)
 
@@ -54,7 +54,7 @@ class ResetAmountProduct:
         return (code_list, item_list)
     
     
-    def __update_amount(self, codes: list, items: list) -> None:
+    def __update_stock(self, codes: list, items: list) -> None:
 
         for i in range(len(codes)):
             for j in range(items[i]):

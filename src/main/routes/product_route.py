@@ -1,15 +1,15 @@
 from flask import Blueprint, jsonify
-from src.main.compose.product_reset_amount_compose import product_reset_amount_compose
+from src.main.compose.product_reset_stock_compose import product_reset_stock_compose
 from src.errors.error_handler import error_handler
 
 product_route_bp = Blueprint("product_route_bp", __name__)
 
 @product_route_bp.route("/products", methods=["POST", "GET"])
-def reset_product_amount():
+def reset_product_stock():
 
     try:
 
-        use_case = product_reset_amount_compose()
+        use_case = product_reset_stock_compose()
         
         response = use_case.handle()
 
