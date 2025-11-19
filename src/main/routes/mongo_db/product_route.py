@@ -2,9 +2,9 @@ from flask import Blueprint, jsonify
 from src.main.compose.mongo_db.product_reset_stock_compose import product_reset_stock_compose
 from src.errors.error_handler import error_handler
 
-product_route_bp = Blueprint("product_route_bp", __name__)
+product_route_mongo_db_bp = Blueprint("product_route_mongo_db_bp", __name__)
 
-@product_route_bp.route("/products", methods=["POST", "GET"])
+@product_route_mongo_db_bp.route("/mongo_db-products", methods=["POST", "GET"])
 def reset_product_stock():
 
     try:
