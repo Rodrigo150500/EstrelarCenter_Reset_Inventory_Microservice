@@ -2,7 +2,7 @@ from src.main.http_types.http_response.http_response import HttpResponse
 from src.model.database.mongodb.repositories.interface.product_repository_interface import IProductRepository
 from src.errors.types.http_error_server import HttpErrorServer
 
-class ResetStockProduct:
+class ResetStockProductUseCase:
 
     def __init__(self, repository: IProductRepository):
         
