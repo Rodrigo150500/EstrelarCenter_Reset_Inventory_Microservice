@@ -3,7 +3,7 @@ from src.model.database.firebase.repositories.product_repository import ProductR
 from src.use_case.firebase.reset_stock_product_use_case import ResetStockProductUseCase
 
 
-def product_reset_stock_firebase_compose():
+def product_reset_stock_compose():
 
     connection = firebase_db_connection.get_connection()
     repository = ProductRepository(connection)
