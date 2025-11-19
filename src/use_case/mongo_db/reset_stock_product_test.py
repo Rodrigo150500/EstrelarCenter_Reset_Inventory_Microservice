@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import Mock, call
-from .reset_stock_product import ResetStockProduct
+from .reset_stock_product_use_case import ResetStockProduct
 from .data.reset_stock_product_data import reset_stock_product_data
 from src.main.http_types.http_response.http_response import HttpResponse
 
