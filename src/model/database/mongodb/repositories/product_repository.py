@@ -30,6 +30,6 @@ class ProductRepository:
 
         response = self.__collection.update_one(
             {code: {"$exists": True}},
-            {"$set": {f"{code}.{item}.amount": 0}})
+            {"$set": {f"{code}.{item}.stock": 0}})
         
         return response
