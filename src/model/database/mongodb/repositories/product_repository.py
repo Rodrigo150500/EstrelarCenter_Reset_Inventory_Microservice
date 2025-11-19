@@ -1,12 +1,13 @@
 from src.model.database.mongodb.repositories.types.update_one_interface import IUpdateOne
 from dotenv import dotenv_values
 from bson.objectid import ObjectId
+from .interface.product_repository_interface import IProductRepository
 
 ENV = dotenv_values("dev.env")
 
 COLLECTION_NAME = ENV["COLLECTION_NAME_MONGO_DB_PRODUCTS"]
 
-class ProductRepository:
+class ProductRepository(IProductRepository):
 
     def __init__(self, connection):
         self.__collection = connection.get_collection(COLLECTION_NAME)
