@@ -1,6 +1,6 @@
 from firebase_admin import db
 from dotenv import dotenv_values
-from interface.product_repository_interface import IProductRepository
+from .interface.product_repository_interface import IProductRepository
 
 ENV = dotenv_values("dev.env")
 COLLECTION = ENV["COLLECTION_NAME_FIREBASE_PRODUCTS"]
