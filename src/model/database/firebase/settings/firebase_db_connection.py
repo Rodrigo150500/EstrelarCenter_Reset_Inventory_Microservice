@@ -1,10 +1,9 @@
 import os
 import firebase_admin
 from firebase_admin import credentials, db
-from dotenv import dotenv_values
 
-ENV = dotenv_values(".env")
-DATABASE_URL = ENV["DATABASE_URL"]
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 class FirebaseDBConnection:

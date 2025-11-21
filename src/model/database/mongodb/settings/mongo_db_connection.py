@@ -1,14 +1,13 @@
+import os
 from pymongo import MongoClient
-from dotenv import dotenv_values
 
-ENV = dotenv_values("dev.env")
 
-USER = ENV["USERNAME"]
-PASSWORD = ENV["PASSWORD"]
-IP_ADDRESS = ENV["IP_ADDRESS"]
-PORT = ENV["MONGO_PORT"]
+USER = os.getenv("USER")
+PASSWORD = os.getenv("PASSWORD")
+IP_ADDRESS = os.getenv("IP_ADDRESS")
+PORT = os.getenv("MONGO_PORT")
 
-DATABASE_NAME = ENV["DATABASE_NAME_MONGO_DB"]
+DATABASE_NAME = os.getenv("DATABASE_NAME_MONGO_DB")
 
 
 class MongoDBConnetion:
@@ -25,8 +24,9 @@ class MongoDBConnetion:
     self.__db_connection = None
 
   def connect(self):
+
     self.__client = MongoClient(self.__connection_string)
-    
+
     self.__db_connection = self.__client[self.__database_name]
 
   def get_db_connection(self):

@@ -1,11 +1,10 @@
+import os
 from src.model.database.mongodb.repositories.types.update_one_interface import IUpdateOne
 from dotenv import dotenv_values
 from bson.objectid import ObjectId
 from .interface.product_repository_interface import IProductRepository
 
-ENV = dotenv_values("dev.env")
-
-COLLECTION_NAME = ENV["COLLECTION_NAME_MONGO_DB_PRODUCTS"]
+COLLECTION_NAME = os.getenv("COLLECTION_NAME_MONGO_DB_PRODUCTS")
 
 class ProductRepository(IProductRepository):
 
