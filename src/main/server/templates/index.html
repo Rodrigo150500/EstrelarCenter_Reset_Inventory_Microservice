@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resetar Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        /* Overlay */
+        #loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        /* Loader circulando */
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Progress Bar */
+        #progress-container {
+            width: 300px;
+            background: #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            height: 20px;
+            background: #4caf50;
+            width: 0%;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            transition: width 0.15s;
+        }
+    </style>
+</head>
+<body>
+
+    <form onsubmit="enviarParaRotas(event)">
+        <button type="submit">Resetar Estoque</button>
+    </form>
+
+    <!-- Overlay com loading e barra de progresso -->
+    <div id="loader-overlay">
+        <div class="loader"></div>
+
+        <div id="progress-container">
+            <div id="progress-bar">0%</div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { CONFIG } from "{{ url_for('static', filename='config.js') }}";
+
+        // Função para atualizar a barra
+        function atualizarBarra(valor) {
+            const bar = document.getElementById("progress-bar");
+            bar.style.width = valor + "%";
+            bar.innerText = valor + "%";
+        }
+
+        // Simula progresso até as rotas terminarem
+        async function progressoSimulado(promessas) {
+            let progresso = 0;
+
+            // loop enquanto as rotas não finalizam
+            while (true) {
+                progresso = Math.min(progresso + Math.random() * 8, 95);
+                atualizarBarra(Math.floor(progresso));
+
+                // espera um pouco antes de atualizar
+                await new Promise(r => setTimeout(r, 200));
+
+                const todasConcluidas = promessas.every(p => p.status === "concluida");
+
+                if (todasConcluidas) break;
+            }
+
+            // Finaliza em 100%
+            atualizarBarra(100);
+        }
+
+        window.enviarParaRotas = async function (event) {
+            event.preventDefault();
+
+            const overlay = document.getElementById("loader-overlay");
+            overlay.style.display = "flex"; // Mostrar loading
+
+            let rotas = [
+                fetch(`${CONFIG.API_URL}/mongo/products`, { method: "POST" }).then(() => ({ status: "concluida" })),
+                fetch(`${CONFIG.API_URL}/firebase/products`, { method: "POST" }).then(() => ({ status: "concluida" }))
+            ];
+
+            // Começa simulação de progresso
+            progressoSimulado(rotas);
+
+            try {
+                await Promise.all(rotas);
+                alert("Reset concluído!");
+            } catch (err) {
+                alert("Erro ao resetar estoque.");
+            }
+
+            overlay.style.display = "none"; // Esconder loading
+            atualizarBarra(0); // Reseta barra
+        }
+    </script>
+
+</body>
+</html>
