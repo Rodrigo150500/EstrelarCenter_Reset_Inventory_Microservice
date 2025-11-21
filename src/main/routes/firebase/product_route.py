@@ -6,7 +6,7 @@ from src.errors.error_handler import error_handler
 product_route_firebase_bp = Blueprint("product_route_firebase_bp", __name__)
 
 
-@product_route_firebase_bp.route("/firebase/products", methods=["POST", "GET"])
+@product_route_firebase_bp.route("/firebase/products", methods=["POST"])
 def reset_product_stock():
 
     try:

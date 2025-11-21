@@ -4,7 +4,7 @@ from src.errors.error_handler import error_handler
 
 product_route_mongo_db_bp = Blueprint("product_route_mongo_db_bp", __name__)
 
-@product_route_mongo_db_bp.route("/mongo/products", methods=["POST", "GET"])
+@product_route_mongo_db_bp.route("/mongo/products", methods=["POST"])
 def reset_product_stock():
 
     try:
